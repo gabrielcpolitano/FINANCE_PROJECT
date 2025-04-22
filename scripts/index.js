@@ -1,88 +1,113 @@
+// Get all necessary elements from the page
 const form = document.getElementById("transaction-form");
-        const list = document.getElementById("transaction-list");
-        const balance = document.getElementById("balance");
-        const filter = document.getElementById("filter");
+const list = document.getElementById("transaction-list");
+const balance = document.getElementById("balance");
+const filter = document.getElementById("filter");
 
-        let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+// Load transactions from local storage or start with an empty array
+let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
-        form.addEventListener("submit", function (e) {
-            e.preventDefault();
+// When the user submits the form
+form.addEventListener("submit", function (e) {
+  e.preventDefault(); // Stop page from refreshing
 
-            const description = document.getElementById("description").value;
-            const amount = parseFloat(document.getElementById("amount").value);
-            const type = document.getElementById("type").value;
+  // Get values from the form inputs
+  const description = document.getElementById("description").value;
+  const amount = parseFloat(document.getElementById("amount").value);
+  const type = document.getElementById("type").value;
 
-            const transaction = {
-                id: Date.now(),
-                description,
-                amount: type === "expense" ? -amount : amount,
-                type
-            };
+  // Create a new transaction object
+  const transaction = {
+    id: Date.now(), // unique ID based on current time
+    description,
+    amount: type === "expense" ? -amount : amount,
+    type
+  };
 
-            transactions.push(transaction);
-            saveAndUpdate();
-            form.reset();
-        });
+  // Add it to the transactions list
+  transactions.push(transaction);
 
-        filter.addEventListener("change", updateUI);
+  // Save to localStorage and refresh the UI
+  saveAndUpdate();
 
-        function saveAndUpdate() {
-            localStorage.setItem("transactions", JSON.stringify(transactions));
-            updateUI();
-        }
+  // Clear the form inputs
+  form.reset();
+});
 
-        function updateUI() {
-            list.innerHTML = "";
-            let total = 0;
-            const selectedFilter = filter.value;
+// Update UI when the filter changes
+filter.addEventListener("change", updateUI);
 
-            transactions.forEach(t => {
-                if (selectedFilter !== "all" && t.type !== selectedFilter) return;
-                const li = document.createElement("li");
-                li.className = `list-group-item d-flex justify-content-between align-items-center ${t.amount < 0 ? 'list-group-item-danger' : 'list-group-item-success'}`;
-                li.innerHTML = `
-                    <span contenteditable="true" onblur="editDescription(${t.id}, this.innerText)">${t.description}</span>
-                    <span>
-                        $${Math.abs(t.amount).toFixed(2)}
-                        <button class="btn btn-sm btn-danger ms-2" onclick="deleteTransaction(${t.id})">Delete</button>
-                    </span>
-                `;
-                list.appendChild(li);
-                total += t.amount;
-            });
+// Save data and update the screen
+function saveAndUpdate() {
+  localStorage.setItem("transactions", JSON.stringify(transactions));
+  updateUI();
+}
 
-            balance.textContent = total.toFixed(2);
-        }
+// Function to update the list and balance
+function updateUI() {
+  list.innerHTML = ""; // Clear old list
+  let total = 0;
+  const selectedFilter = filter.value;
 
-        function deleteTransaction(id) {
-            transactions = transactions.filter(t => t.id !== id);
-            saveAndUpdate();
-        }
+  transactions.forEach(t => {
+    // Skip if current item doesn't match the filter
+    if (selectedFilter !== "all" && t.type !== selectedFilter) return;
 
-        function editDescription(id, newDescription) {
-            const index = transactions.findIndex(t => t.id === id);
-            if (index !== -1) {
-                transactions[index].description = newDescription;
-                saveAndUpdate();
-            }
-        }
+    // Create a list item
+    const li = document.createElement("li");
+    li.className = `list-group-item d-flex justify-content-between align-items-center ${
+      t.amount < 0 ? "list-group-item-danger" : "list-group-item-success"
+    }`;
 
-        function exportCSV() {
-            let csv = "Description,Amount,Type\n";
-            transactions.forEach(t => {
-                csv += `${t.description},${t.amount},${t.type}\n`;
-            });
+    // Add transaction content
+    li.innerHTML = `
+      <span contenteditable="true" onblur="editDescription(${t.id}, this.innerText)">
+        ${t.description}
+      </span>
+      <span>
+        $${Math.abs(t.amount).toFixed(2)}
+        <button class="btn btn-sm btn-danger ms-2" onclick="deleteTransaction(${t.id})">Delete</button>
+      </span>
+    `;
 
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.setAttribute("href", url);
-            a.setAttribute("download", "transactions.csv");
-            a.click();
-        }
+    list.appendChild(li);
+    total += t.amount;
+  });
 
-        function toggleDarkMode() {
-            document.body.classList.toggle("dark-mode");
-        }
+  // Show the total balance
+  balance.textContent = total.toFixed(2);
+}
 
-        window.addEventListener("load", updateUI);
+// Delete a transaction by ID
+function deleteTransaction(id) {
+  transactions = transactions.filter(t => t.id !== id);
+  saveAndUpdate();
+}
+
+// Edit the description inline
+function editDescription(id, newDescription) {
+  const transaction = transactions.find(t => t.id === id);
+  if (transaction) {
+    transaction.description = newDescription;
+    saveAndUpdate();
+  }
+}
+
+// Export all transactions as a CSV file
+function exportCSV() {
+  let csv = "Description,Amount,Type\n";
+  transactions.forEach(t => {
+    csv += `${t.description},${t.amount},${t.type}\n`;
+  });
+
+  const blob = new Blob([csv], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "transactions.csv";
+  a.click();
+}
+
+
+// Load data and show it when page is opened
+window.addEventListener("load", updateUI);
