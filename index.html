@@ -1,152 +1,252 @@
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finance Manager</title>
-    <link rel="icon" href="/images/favicon/favicon-16x16.png" type="image/png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/style/index.css">
+    <title>Controle de Finanças Pessoais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-purple">
-        <div class="container-fluid">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="/images/favicon/android-chrome-512x512.png" alt="Logo" width="32" height="32" class="me-2">
-                Finance Manager
-            </a>
-            <div class="ms-auto d-flex align-items-center">
-                <span class="navbar-text text-white me-3" id="welcome-user"></span>
-                <button class="btn btn-outline-light btn-sm" onclick="logout()">Logout</button>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-full transition-colors duration-300">
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
+                    <i class="fas fa-wallet mr-2 text-primary-500"></i>
+                    Finanças Pessoais
+                </h1>
+                <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:inline"></i>
+                </button>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-6 mb-2">
-                <div class="card p-4">
-                    <h4>Add Transaction</h4>
-                    <form id="transaction-form">
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
-                            <input type="text" class="form-control" id="description" required>
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Dashboard Cards -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Earnings Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total de Ganhos</p>
+                        <p id="totalEarnings" class="text-2xl font-bold text-green-600 dark:text-green-400">R$ 0,00</p>
+                    </div>
+                    <div class="p-3 bg-green-100 dark:bg-green-900 rounded-full">
+                        <i class="fas fa-arrow-up text-green-600 dark:text-green-400"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Expenses Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total de Gastos</p>
+                        <p id="totalExpenses" class="text-2xl font-bold text-red-600 dark:text-red-400">R$ 0,00</p>
+                    </div>
+                    <div class="p-3 bg-red-100 dark:bg-red-900 rounded-full">
+                        <i class="fas fa-arrow-down text-red-600 dark:text-red-400"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saved Amount Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Guardado (10%)</p>
+                        <p id="savedAmount" class="text-2xl font-bold text-blue-600 dark:text-blue-400">R$ 0,00</p>
+                    </div>
+                    <div class="p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
+                        <i class="fas fa-piggy-bank text-blue-600 dark:text-blue-400"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Available Balance Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Saldo Disponível</p>
+                        <p id="availableBalance" class="text-2xl font-bold text-purple-600 dark:text-purple-400">R$ 0,00</p>
+                    </div>
+                    <div class="p-3 bg-purple-100 dark:bg-purple-900 rounded-full">
+                        <i class="fas fa-coins text-purple-600 dark:text-purple-400"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alert Section -->
+        <div id="alertSection" class="hidden mb-6">
+            <div class="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-200 px-4 py-3 rounded-lg">
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    <span id="alertMessage"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forms Section -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Income Forms -->
+            <div class="space-y-6">
+                <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Registrar Ganhos</h2>
+                
+                <!-- Fixed Income Form -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-4">Ganhos Fixos</h3>
+                    <form id="fixedIncomeForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descrição</label>
+                            <input type="text" id="fixedIncomeDescription" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="amount" class="form-label">Amount</label>
-                            <input type="number" class="form-control" id="amount" required>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Valor</label>
+                            <input type="number" id="fixedIncomeAmount" step="0.01" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="type" class="form-label">Type</label>
-                            <select class="form-select" id="type" required>
-                                <option value="income">Income</option>
-                                <option value="expense">Expense</option>
-                            </select>
+                        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
+                            <i class="fas fa-plus mr-2"></i>Adicionar Ganho Fixo
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Variable Income Form -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-4">Ganhos Variáveis</h3>
+                    <form id="variableIncomeForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descrição</label>
+                            <input type="text" id="variableIncomeDescription" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
                         </div>
-                        <button type="submit" class="btn btn-custom">Add Transaction</button>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Valor</label>
+                            <input type="number" id="variableIncomeAmount" step="0.01" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Data</label>
+                            <input type="date" id="variableIncomeDate" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                        </div>
+                        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
+                            <i class="fas fa-plus mr-2"></i>Adicionar Ganho Variável
+                        </button>
                     </form>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card p-4">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h4>Transactions</h4>
-                        <select id="filter" class="form-select w-auto">
-                            <option value="all">All</option>
-                            <option value="income">Income</option>
-                            <option value="expense">Expense</option>
-                        </select>
-                    </div>
-                    <ul class="list-group mt-3" id="transaction-list"></ul>
-                    <div class="mt-4">
-                        <h5>Total Balance: $<span id="balance">0</span></h5>
-                        <button class="btn btn-outline-success mt-2" onclick="exportCSV()">Export to CSV</button>
-                    </div>
+
+            <!-- Expense Forms -->
+            <div class="space-y-6">
+                <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Registrar Gastos</h2>
+                
+                <!-- Fixed Expense Form -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-4">Contas Fixas</h3>
+                    <form id="fixedExpenseForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descrição</label>
+                            <input type="text" id="fixedExpenseDescription" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Valor</label>
+                            <input type="number" id="fixedExpenseAmount" step="0.01" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                        </div>
+                        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
+                            <i class="fas fa-plus mr-2"></i>Adicionar Conta Fixa
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Variable Expense Form -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-4">Contas Variáveis</h3>
+                    <form id="variableExpenseForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descrição</label>
+                            <input type="text" id="variableExpenseDescription" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Valor</label>
+                            <input type="number" id="variableExpenseAmount" step="0.01" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Data</label>
+                            <input type="date" id="variableExpenseDate" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                        </div>
+                        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
+                            <i class="fas fa-plus mr-2"></i>Adicionar Conta Variável
+                        </button>
+                    </form>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <script>
-        const email = localStorage.getItem('loggedInUserEmail');
-        const users = JSON.parse(localStorage.getItem('users')) || {};
-        const user = users[email];
+        <!-- Daily Expenses Form -->
+        <section class="mb-8">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Gastos Diários</h2>
+                <form id="dailyExpenseForm" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descrição</label>
+                        <input type="text" id="dailyExpenseDescription" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Valor</label>
+                        <input type="number" id="dailyExpenseAmount" step="0.01" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Data</label>
+                        <input type="date" id="dailyExpenseDate" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                    </div>
+                    <div class="md:col-span-3">
+                        <button type="submit" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
+                            <i class="fas fa-plus mr-2"></i>Adicionar Gasto Diário
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
 
-        if (!user) {
-            window.location.href = 'auth.html';
-        }
+        <!-- Transactions List -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Income List -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Ganhos Registrados</h2>
+                <div id="incomeList" class="space-y-3">
+                    <p class="text-gray-500 dark:text-gray-400 text-center py-4">Nenhum ganho registrado ainda</p>
+                </div>
+            </div>
 
-        document.getElementById('welcome-user').textContent = `Welcome, ${user.username}`;
+            <!-- Expense List -->
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Gastos Registrados</h2>
+                <div id="expenseList" class="space-y-3">
+                    <p class="text-gray-500 dark:text-gray-400 text-center py-4">Nenhum gasto registrado ainda</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
-        let transactions = user.transactions || [];
-
-        function renderTransactions() {
-            const list = document.getElementById('transaction-list');
-            const balance = document.getElementById('balance');
-            list.innerHTML = '';
-
-            let total = 0;
-            const filter = document.getElementById('filter').value;
-
-            transactions.forEach((t, index) => {
-                if (filter === 'all' || t.type === filter) {
-                    const li = document.createElement('li');
-                    li.className = 'list-group-item d-flex justify-content-between';
-                    li.innerHTML = `${t.description} - $${t.amount} <button class="btn btn-sm btn-danger" onclick="deleteTransaction(${index})">X</button>`;
-                    list.appendChild(li);
-                }
-                total += t.type === 'income' ? parseFloat(t.amount) : -parseFloat(t.amount);
-            });
-
-            balance.textContent = total.toFixed(2);
-        }
-
-        function saveUserTransactions() {
-            users[email].transactions = transactions;
-            localStorage.setItem('users', JSON.stringify(users));
-        }
-
-        function deleteTransaction(index) {
-            transactions.splice(index, 1);
-            saveUserTransactions();
-            renderTransactions();
-        }
-
-        document.getElementById('transaction-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const description = document.getElementById('description').value;
-            const amount = document.getElementById('amount').value;
-            const type = document.getElementById('type').value;
-
-            transactions.push({ description, amount, type });
-            saveUserTransactions();
-            renderTransactions();
-            this.reset();
-        });
-
-        document.getElementById('filter').addEventListener('change', renderTransactions);
-
-        function logout() {
-            localStorage.removeItem('loggedInUserEmail');
-            window.location.href = 'auth.html';
-        }
-
-        function exportCSV() {
-            let csv = 'Description,Amount,Type\n';
-            transactions.forEach(t => {
-                csv += `${t.description},${t.amount},${t.type}\n`;
-            });
-
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'transactions.csv';
-            link.click();
-        }
-
-        renderTransactions();
-    </script>
+    <script src="script.js"></script>
 </body>
-
 </html>

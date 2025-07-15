@@ -1,0 +1,108 @@
+Crie um site completo e profissional para controle de finanças pessoais, utilizando as seguintes tecnologias:
+
+HTML5 semântico
+
+Tailwind CSS para todo o estilo (não usar CSS puro nem bibliotecas visuais)
+
+JavaScript puro com manipulação via DOM
+
+Responsivo para desktop e mobile
+
+💡 Objetivo do site:
+O site deve permitir que o usuário:
+
+Cadastre ganhos fixos e ganhos variáveis
+
+Registre contas fixas (como aluguel, luz, internet) e contas variáveis (como delivery, mercado, transporte)
+
+Registre gastos diários, com:
+
+valor
+
+descrição
+
+data
+
+Com base nisso, o sistema deve:
+
+Calcular automaticamente:
+
+Total de ganhos
+
+Total de gastos
+
+Valor guardado (meta: guardar 10% dos ganhos totais)
+
+Saldo disponível para gastar (90% dos ganhos menos os gastos)
+
+🔧 Funcionalidades obrigatórias:
+Dashboard principal com:
+
+Cartões (cards) com:
+
+Total de ganhos
+
+Total de gastos
+
+Total guardado (10%)
+
+Saldo disponível
+
+Usar Tailwind para destacar visualmente essas informações
+
+Formulários de cadastro:
+
+Ganhos fixos e variáveis
+
+Contas fixas e variáveis
+
+Gastos diários (com campos: valor, descrição e data)
+
+Listagem dos lançamentos:
+
+Tabelas ou listas com todos os valores cadastrados
+
+Permitir remover um lançamento
+
+Atualizar os totais automaticamente
+
+Cálculos automáticos:
+
+Sempre que um dado for inserido, recalcular:
+
+Total de ganhos (fixos + variáveis)
+
+Total de gastos (fixos + variáveis + diários)
+
+Valor guardado (10% dos ganhos)
+
+Saldo disponível
+
+💾 Extras desejáveis:
+Salvar todos os dados no localStorage
+
+Mostrar alertas ou notificações (ex: quando estiver gastando mais do que pode)
+
+Modo escuro com Tailwind (dark: classes e alternância via botão)
+
+🎨 Estilo:
+Visual moderno, limpo e responsivo
+
+Usar componentes como:
+
+Cards (shadow, rounded, bg-gray-100, p-4)
+
+Botões (hover:bg-blue-600, transition, rounded)
+
+Inputs com foco (focus:ring, border, rounded)
+
+Layout principal com flex, grid, gap, w-full, max-w-screen-md, mx-auto
+
+Tipografia clara com text-lg, font-semibold, text-gray-800
+
+📁 Estrutura esperada:
+index.html com estrutura e marcação
+
+script.js com a lógica (DOM e localStorage)
+
+Estilização 100% com Tailwind CSS via CDN
