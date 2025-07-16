@@ -7,7 +7,7 @@ This is a personal finance management web application built with vanilla HTML, C
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
-Savings rate preference: 50% of income (instead of default 10%)
+Savings rate preference: Flexible percentage (1%-100%) - currently set to 50%
 
 ## System Architecture
 
@@ -42,13 +42,21 @@ Savings rate preference: 50% of income (instead of default 10%)
 
 ### 4. Financial Calculations
 - **Automatic Totals**: Real-time calculation of income and expense totals
-- **Savings Goal**: 50% of total income automatically allocated to savings
-- **Available Balance**: 50% of income minus total expenses
+- **Flexible Savings Goal**: User-configurable percentage (1%-100%) of income allocated to savings
+- **Available Balance**: Remaining percentage of income minus total expenses
+- **Interactive Configuration**: Click on "Total Guardado" card to adjust savings percentage
 
 ### 5. Data Management
 - **Local Storage**: Browser-based data persistence
 - **CRUD Operations**: Add, view, and manage financial entries
 - **Data Validation**: Form validation for financial entries
+- **Settings Persistence**: Savings percentage preferences saved locally
+
+### 6. User Interface Features
+- **Interactive Cards**: Click "Total Guardado" to configure savings percentage
+- **Modal Interface**: Slider-based percentage selector (1%-100%)
+- **Real-time Preview**: Shows impact of percentage changes before applying
+- **Responsive Design**: Works across all device sizes
 
 ## Data Flow
 

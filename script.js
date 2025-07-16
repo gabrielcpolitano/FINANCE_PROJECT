@@ -8,6 +8,7 @@ class FinanceManager {
             variableExpenses: [],
             dailyExpenses: []
         };
+        this.savingsPercentage = 50; // Default 50%
         this.loadData();
         this.bindEvents();
         this.updateDashboard();
@@ -29,11 +30,17 @@ class FinanceManager {
         if (savedData) {
             this.data = JSON.parse(savedData);
         }
+        
+        const savedPercentage = localStorage.getItem('savingsPercentage');
+        if (savedPercentage) {
+            this.savingsPercentage = parseInt(savedPercentage);
+        }
     }
 
     // Save data to localStorage
     saveData() {
         localStorage.setItem('financeData', JSON.stringify(this.data));
+        localStorage.setItem('savingsPercentage', this.savingsPercentage.toString());
     }
 
     // Bind form events
@@ -67,6 +74,27 @@ class FinanceManager {
         // Dark mode toggle
         document.getElementById('darkModeToggle').addEventListener('click', () => {
             this.toggleDarkMode();
+        });
+
+        // Savings percentage modal
+        document.getElementById('savedAmountCard').addEventListener('click', () => {
+            this.openSavingsModal();
+        });
+
+        document.getElementById('closeSavingsModal').addEventListener('click', () => {
+            this.closeSavingsModal();
+        });
+
+        document.getElementById('cancelSavingsModal').addEventListener('click', () => {
+            this.closeSavingsModal();
+        });
+
+        document.getElementById('saveSavingsPercentage').addEventListener('click', () => {
+            this.saveSavingsPercentage();
+        });
+
+        document.getElementById('savingsPercentageSlider').addEventListener('input', (e) => {
+            this.updateSavingsPreview(e.target.value);
         });
 
         // Initialize dark mode
@@ -237,8 +265,8 @@ class FinanceManager {
         const totalDailyExpenses = this.data.dailyExpenses.reduce((sum, item) => sum + item.amount, 0);
         const totalExpenses = totalFixedExpenses + totalVariableExpenses + totalDailyExpenses;
 
-        const savedAmount = totalEarnings * 0.50; // 50% of earnings
-        const availableBalance = (totalEarnings * 0.50) - totalExpenses; // 50% of earnings minus expenses
+        const savedAmount = totalEarnings * (this.savingsPercentage / 100); // Dynamic percentage of earnings
+        const availableBalance = (totalEarnings * ((100 - this.savingsPercentage) / 100)) - totalExpenses; // Remaining percentage minus expenses
 
         return {
             totalEarnings,
@@ -256,6 +284,7 @@ class FinanceManager {
         document.getElementById('totalExpenses').textContent = this.formatCurrency(totals.totalExpenses);
         document.getElementById('savedAmount').textContent = this.formatCurrency(totals.savedAmount);
         document.getElementById('availableBalance').textContent = this.formatCurrency(totals.availableBalance);
+        document.getElementById('savingsPercentageDisplay').textContent = this.savingsPercentage;
 
         // Show alert if spending more than available
         this.checkSpendingAlert(totals);
@@ -402,6 +431,35 @@ class FinanceManager {
     formatDate(dateString) {
         const date = new Date(dateString);
         return date.toLocaleDateString('pt-BR');
+    }
+
+    // Open savings modal
+    openSavingsModal() {
+        document.getElementById('savingsModal').classList.remove('hidden');
+        document.getElementById('savingsPercentageSlider').value = this.savingsPercentage;
+        this.updateSavingsPreview(this.savingsPercentage);
+    }
+
+    // Close savings modal
+    closeSavingsModal() {
+        document.getElementById('savingsModal').classList.add('hidden');
+    }
+
+    // Update savings preview
+    updateSavingsPreview(percentage) {
+        document.getElementById('savingsPercentageValue').textContent = percentage + '%';
+        document.getElementById('previewSavings').textContent = percentage + '%';
+        document.getElementById('previewAvailable').textContent = (100 - percentage) + '%';
+    }
+
+    // Save savings percentage
+    saveSavingsPercentage() {
+        const newPercentage = parseInt(document.getElementById('savingsPercentageSlider').value);
+        this.savingsPercentage = newPercentage;
+        this.saveData();
+        this.updateDashboard();
+        this.closeSavingsModal();
+        this.showNotification(`Porcentagem de economia atualizada para ${newPercentage}%!`, 'success');
     }
 }
 

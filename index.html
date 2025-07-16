@@ -73,10 +73,10 @@
             </div>
 
             <!-- Saved Amount Card -->
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+            <div id="savedAmountCard" class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700 cursor-pointer hover:shadow-lg transition-shadow duration-200">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Guardado (50%)</p>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Guardado (<span id="savingsPercentageDisplay">50</span>%)</p>
                         <p id="savedAmount" class="text-2xl font-bold text-blue-600 dark:text-blue-400">R$ 0,00</p>
                     </div>
                     <div class="p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
@@ -247,6 +247,65 @@
             </div>
         </section>
     </main>
+
+    <!-- Savings Percentage Modal -->
+    <div id="savingsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6 border border-gray-200 dark:border-gray-700">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Configurar Porcentagem de Economia</h3>
+                <button id="closeSavingsModal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Porcentagem para Economia (1% - 100%)
+                    </label>
+                    <div class="relative">
+                        <input 
+                            type="range" 
+                            id="savingsPercentageSlider" 
+                            min="1" 
+                            max="100" 
+                            value="50" 
+                            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                        >
+                        <div class="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+                            <span>1%</span>
+                            <span>100%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg">
+                    <span class="text-sm text-gray-600 dark:text-gray-300">Valor selecionado:</span>
+                    <span id="savingsPercentageValue" class="text-lg font-bold text-blue-600 dark:text-blue-400">50%</span>
+                </div>
+                
+                <div class="text-sm text-gray-600 dark:text-gray-400 bg-blue-50 dark:bg-blue-900 p-3 rounded-lg">
+                    <p><strong>Economia:</strong> <span id="previewSavings">50%</span> da renda</p>
+                    <p><strong>Disponível:</strong> <span id="previewAvailable">50%</span> da renda para gastos</p>
+                </div>
+            </div>
+            
+            <div class="flex gap-3 mt-6">
+                <button 
+                    id="cancelSavingsModal" 
+                    class="flex-1 px-4 py-2 bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors duration-200"
+                >
+                    Cancelar
+                </button>
+                <button 
+                    id="saveSavingsPercentage" 
+                    class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                >
+                    Aplicar
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
