@@ -237,8 +237,8 @@ class FinanceManager {
         const totalDailyExpenses = this.data.dailyExpenses.reduce((sum, item) => sum + item.amount, 0);
         const totalExpenses = totalFixedExpenses + totalVariableExpenses + totalDailyExpenses;
 
-        const savedAmount = totalEarnings * 0.85; // 85% of earnings
-        const availableBalance = (totalEarnings * 0.15) - totalExpenses; // 15% of earnings minus expenses
+        const savedAmount = totalEarnings * 0.50; // 50% of earnings
+        const availableBalance = (totalEarnings * 0.50) - totalExpenses; // 50% of earnings minus expenses
 
         return {
             totalEarnings,
@@ -269,7 +269,7 @@ class FinanceManager {
         if (totals.availableBalance < 0) {
             alertMessage.textContent = `Atenção! Você está gastando R$ ${this.formatCurrency(Math.abs(totals.availableBalance))} a mais do que pode.`;
             alertSection.classList.remove('hidden');
-        } else if (totals.availableBalance < totals.totalEarnings * 0.05) {
+        } else if (totals.availableBalance < totals.totalEarnings * 0.10) {
             alertMessage.textContent = 'Cuidado! Você está próximo do limite de gastos.';
             alertSection.classList.remove('hidden');
         } else {
