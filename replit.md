@@ -7,6 +7,7 @@ This is a personal finance management web application built with vanilla HTML, C
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Savings rate preference: 85% of income (instead of default 10%)
 
 ## System Architecture
 
@@ -41,8 +42,8 @@ Preferred communication style: Simple, everyday language.
 
 ### 4. Financial Calculations
 - **Automatic Totals**: Real-time calculation of income and expense totals
-- **Savings Goal**: 10% of total income automatically allocated to savings
-- **Available Balance**: 90% of income minus total expenses
+- **Savings Goal**: 85% of total income automatically allocated to savings
+- **Available Balance**: 15% of income minus total expenses
 
 ### 5. Data Management
 - **Local Storage**: Browser-based data persistence
