@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="h-full">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Finanças Pessoais</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -25,6 +27,7 @@
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-full transition-colors duration-300">
     <!-- Header -->
     <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
@@ -34,7 +37,8 @@
                     <i class="fas fa-wallet mr-2 text-primary-500"></i>
                     Acertar Contas (Dia 5)<br> Refatorar Gestão (Dia 5)
                 </h1>
-                <button id="darkModeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200">
+                <button id="darkModeToggle"
+                    class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200">
                     <i class="fas fa-moon dark:hidden"></i>
                     <i class="fas fa-sun hidden dark:inline"></i>
                 </button>
@@ -73,10 +77,12 @@
             </div>
 
             <!-- Saved Amount Card -->
-            <div id="savedAmountCard" class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700 cursor-pointer hover:shadow-lg transition-shadow duration-200">
+            <div id="savedAmountCard"
+                class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700 cursor-pointer hover:shadow-lg transition-shadow duration-200">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Guardado (<span id="savingsPercentageDisplay">50</span>%)</p>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Total Guardado (<span
+                                id="savingsPercentageDisplay">50</span>%)</p>
                         <p id="savedAmount" class="text-2xl font-bold text-blue-600 dark:text-blue-400">R$ 0,00</p>
                     </div>
                     <div class="p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
@@ -90,7 +96,8 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Saldo Disponível</p>
-                        <p id="availableBalance" class="text-2xl font-bold text-purple-600 dark:text-purple-400">R$ 0,00</p>
+                        <p id="availableBalance" class="text-2xl font-bold text-purple-600 dark:text-purple-400">R$ 0,00
+                        </p>
                     </div>
                     <div class="p-3 bg-purple-100 dark:bg-purple-900 rounded-full">
                         <i class="fas fa-coins text-purple-600 dark:text-purple-400"></i>
@@ -101,7 +108,8 @@
 
         <!-- Alert Section -->
         <div id="alertSection" class="hidden mb-6">
-            <div class="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-200 px-4 py-3 rounded-lg">
+            <div
+                class="bg-red-100 dark:bg-red-900 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-200 px-4 py-3 rounded-lg">
                 <div class="flex items-center">
                     <i class="fas fa-exclamation-triangle mr-2"></i>
                     <span id="alertMessage"></span>
@@ -114,42 +122,58 @@
             <!-- Income Forms -->
             <div class="space-y-6">
                 <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Registrar Ganhos</h2>
-                
+
                 <!-- Fixed Income Form -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
                     <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-4">Ganhos Fixos</h3>
                     <form id="fixedIncomeForm" class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descrição</label>
-                            <input type="text" id="fixedIncomeDescription" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                            <label
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descrição</label>
+                            <input type="text" id="fixedIncomeDescription"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
+                                required>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Valor</label>
-                            <input type="number" id="fixedIncomeAmount" step="0.01" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                            <input type="number" id="fixedIncomeAmount" step="0.01"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
+                                required>
                         </div>
-                        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
+                        <button type="submit"
+                            class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
                             <i class="fas fa-plus mr-2"></i>Adicionar Ganho Fixo
                         </button>
                     </form>
                 </div>
 
                 <!-- Variable Income Form -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
                     <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-4">Ganhos Variáveis</h3>
                     <form id="variableIncomeForm" class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descrição</label>
-                            <input type="text" id="variableIncomeDescription" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                            <label
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descrição</label>
+                            <input type="text" id="variableIncomeDescription"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
+                                required>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Valor</label>
-                            <input type="number" id="variableIncomeAmount" step="0.01" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                            <input type="number" id="variableIncomeAmount" step="0.01"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
+                                required>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Data</label>
-                            <input type="date" id="variableIncomeDate" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                            <input type="date" id="variableIncomeDate"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
+                                required>
                         </div>
-                        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
+                        <button type="submit"
+                            class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
                             <i class="fas fa-plus mr-2"></i>Adicionar Ganho Variável
                         </button>
                     </form>
@@ -159,42 +183,58 @@
             <!-- Expense Forms -->
             <div class="space-y-6">
                 <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Registrar Gastos</h2>
-                
+
                 <!-- Fixed Expense Form -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
                     <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-4">Contas Fixas</h3>
                     <form id="fixedExpenseForm" class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descrição</label>
-                            <input type="text" id="fixedExpenseDescription" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                            <label
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descrição</label>
+                            <input type="text" id="fixedExpenseDescription"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
+                                required>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Valor</label>
-                            <input type="number" id="fixedExpenseAmount" step="0.01" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                            <input type="number" id="fixedExpenseAmount" step="0.01"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
+                                required>
                         </div>
-                        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
+                        <button type="submit"
+                            class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
                             <i class="fas fa-plus mr-2"></i>Adicionar Conta Fixa
                         </button>
                     </form>
                 </div>
 
                 <!-- Variable Expense Form -->
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 border border-gray-200 dark:border-gray-700">
                     <h3 class="text-lg font-medium text-gray-700 dark:text-gray-300 mb-4">Contas Variáveis</h3>
                     <form id="variableExpenseForm" class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descrição</label>
-                            <input type="text" id="variableExpenseDescription" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                            <label
+                                class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descrição</label>
+                            <input type="text" id="variableExpenseDescription"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
+                                required>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Valor</label>
-                            <input type="number" id="variableExpenseAmount" step="0.01" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                            <input type="number" id="variableExpenseAmount" step="0.01"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
+                                required>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Data</label>
-                            <input type="date" id="variableExpenseDate" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                            <input type="date" id="variableExpenseDate"
+                                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
+                                required>
                         </div>
-                        <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
+                        <button type="submit"
+                            class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
                             <i class="fas fa-plus mr-2"></i>Adicionar Conta Variável
                         </button>
                     </form>
@@ -209,18 +249,25 @@
                 <form id="dailyExpenseForm" class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Descrição</label>
-                        <input type="text" id="dailyExpenseDescription" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                        <input type="text" id="dailyExpenseDescription"
+                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
+                            required>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Valor</label>
-                        <input type="number" id="dailyExpenseAmount" step="0.01" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                        <input type="number" id="dailyExpenseAmount" step="0.01"
+                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
+                            required>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Data</label>
-                        <input type="date" id="dailyExpenseDate" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white" required>
+                        <input type="date" id="dailyExpenseDate"
+                            class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 dark:bg-gray-700 dark:text-white"
+                            required>
                     </div>
                     <div class="md:col-span-3">
-                        <button type="submit" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
+                        <button type="submit"
+                            class="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
                             <i class="fas fa-plus mr-2"></i>Adicionar Gasto Diário
                         </button>
                     </div>
@@ -249,64 +296,77 @@
     </main>
 
     <!-- Savings Percentage Modal -->
-    <div id="savingsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6 border border-gray-200 dark:border-gray-700">
+    <div id="savingsModal"
+        class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div
+            class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md w-full p-6 border border-gray-200 dark:border-gray-700">
             <div class="flex items-center justify-between mb-6">
-                <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Configurar Porcentagem de Economia</h3>
-                <button id="closeSavingsModal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-xl">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Configurar Porcentagem de Economia
+                </h3>
+                <button id="closeSavingsModal"
+                    class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 text-xl">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            
+
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Porcentagem para Economia (1% - 100%)
                     </label>
                     <div class="relative">
-                        <input 
-                            type="range" 
-                            id="savingsPercentageSlider" 
-                            min="1" 
-                            max="100" 
-                            value="50" 
-                            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
-                        >
+                        <input type="range" id="savingsPercentageSlider" min="1" max="100" value="50"
+                            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
                         <div class="flex justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
                             <span>1%</span>
                             <span>100%</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="flex items-center justify-between bg-gray-50 dark:bg-gray-700 p-3 rounded-lg">
                     <span class="text-sm text-gray-600 dark:text-gray-300">Valor selecionado:</span>
-                    <span id="savingsPercentageValue" class="text-lg font-bold text-blue-600 dark:text-blue-400">50%</span>
+                    <span id="savingsPercentageValue"
+                        class="text-lg font-bold text-blue-600 dark:text-blue-400">50%</span>
                 </div>
-                
+
                 <div class="text-sm text-gray-600 dark:text-gray-400 bg-blue-50 dark:bg-blue-900 p-3 rounded-lg">
                     <p><strong>Economia:</strong> <span id="previewSavings">50%</span> da renda</p>
                     <p><strong>Disponível:</strong> <span id="previewAvailable">50%</span> da renda para gastos</p>
                 </div>
             </div>
-            
+
             <div class="flex gap-3 mt-6">
-                <button 
-                    id="cancelSavingsModal" 
-                    class="flex-1 px-4 py-2 bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors duration-200"
-                >
+                <button id="cancelSavingsModal"
+                    class="flex-1 px-4 py-2 bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors duration-200">
                     Cancelar
                 </button>
-                <button 
-                    id="saveSavingsPercentage" 
-                    class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
-                >
+                <button id="saveSavingsPercentage"
+                    class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
                     Aplicar
                 </button>
             </div>
         </div>
     </div>
 
+    <!-- Botões de Exportar/Importar JSON -->
+    <section class="flex flex-wrap gap-4 justify-center mt-8">
+        <button id="exportJsonBtn"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
+            <i class="fas fa-download mr-2"></i>Exportar JSON
+        </button>
+
+        <label for="importJsonInput"
+            class="cursor-pointer bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200">
+            <i class="fas fa-upload mr-2"></i>Importar JSON
+            <input type="file" id="importJsonInput" accept=".json" class="hidden">
+        </label>
+    </section>
+
+    <div class="h-12"></div>
+
+
     <script src="script.js"></script>
 </body>
+
 </html>

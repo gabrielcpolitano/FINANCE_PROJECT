@@ -30,12 +30,56 @@ class FinanceManager {
         if (savedData) {
             this.data = JSON.parse(savedData);
         }
-        
+
         const savedPercentage = localStorage.getItem('savingsPercentage');
         if (savedPercentage) {
             this.savingsPercentage = parseInt(savedPercentage);
         }
     }
+
+    // Export data as JSON
+    exportDataAsJson() {
+        const exportObject = {
+            data: this.data,
+            savingsPercentage: this.savingsPercentage
+        };
+        const json = JSON.stringify(exportObject, null, 2);
+        const blob = new Blob([json], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "financas.json";
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    // Import data from JSON
+    importDataFromJson(file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            try {
+                const parsed = JSON.parse(e.target.result);
+                if (
+                    parsed.data &&
+                    typeof parsed.savingsPercentage === "number"
+                ) {
+                    this.data = parsed.data;
+                    this.savingsPercentage = parsed.savingsPercentage;
+                    this.saveData();
+                    this.updateDashboard();
+                    this.renderTransactions();
+                    this.showNotification('Dados importados com sucesso!', 'success');
+                } else {
+                    this.showNotification('Arquivo JSON inválido.', 'error');
+                }
+            } catch (error) {
+                this.showNotification('Erro ao importar JSON.', 'error');
+            }
+        };
+        reader.readAsText(file);
+    }
+
 
     // Save data to localStorage
     saveData() {
@@ -95,6 +139,19 @@ class FinanceManager {
 
         document.getElementById('savingsPercentageSlider').addEventListener('input', (e) => {
             this.updateSavingsPreview(e.target.value);
+        });
+
+        // Exportar dados
+        document.getElementById('exportJsonBtn').addEventListener('click', () => {
+            this.exportDataAsJson();
+        });
+
+        // Importar dados
+        document.getElementById('importJsonInput').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                this.importDataFromJson(file);
+            }
         });
 
         // Initialize dark mode
@@ -318,11 +375,10 @@ class FinanceManager {
     showNotification(message, type) {
         // Create notification element
         const notification = document.createElement('div');
-        notification.className = `fixed top-4 right-4 z-50 px-4 py-3 rounded-lg shadow-lg transition-all duration-300 ${
-            type === 'success' 
-                ? 'bg-green-100 border border-green-400 text-green-700' 
-                : 'bg-red-100 border border-red-400 text-red-700'
-        }`;
+        notification.className = `fixed top-4 right-4 z-50 px-4 py-3 rounded-lg shadow-lg transition-all duration-300 ${type === 'success'
+            ? 'bg-green-100 border border-green-400 text-green-700'
+            : 'bg-red-100 border border-red-400 text-red-700'
+            }`;
         notification.innerHTML = `
             <div class="flex items-center">
                 <i class="fas fa-${type === 'success' ? 'check' : 'exclamation'}-circle mr-2"></i>
